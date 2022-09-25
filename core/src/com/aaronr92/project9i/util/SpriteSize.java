@@ -1,4 +1,4 @@
-package com.aaronr92.util;
+package com.aaronr92.project9i.util;
 
 public enum SpriteSize {
     SPRITE_8x8(8),
