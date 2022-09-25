@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -44,11 +45,15 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
 
         // AssetManager
-        assetManager = new AssetManager("Tileset_ores.png", SpriteSize.SPRITE_16x16);
+        assetManager = new AssetManager("tileset/frozen_level_tileset.png", SpriteSize.SPRITE_16x16);
 
-        assetManager.addSprite("emerald", 0, 0);
-        assetManager.addSprite("rock", 1, 2);
-        assetManager.addSprite("chest", 4, 0);
+        assetManager.addSprite("floor_1", 0, 0);
+        assetManager.addSprite("floor_2", 0, 1);
+        assetManager.addSprite("floor_3", 0, 2);
+        assetManager.addSprite("wall_1", 4, 3);
+        assetManager.addSprite("wall_2", 4, 4);
+        assetManager.addSprite("top_wall_1", 3, 0);
+        assetManager.addSprite("top_wall_2", 3, 1);
 
         // Player init
         /* TODO
@@ -58,7 +63,8 @@ public class GameScreen implements Screen {
         int playerX = (256 / 2) - 8;
         int playerY = (144 / 2) - 8;
 
-        player = assetManager.getSprite("chest");
+        player = new Sprite(new Texture(Gdx.files.internal("Char.png")), 0, 0, 32, 32);
+        player.scale(-0.2f);
         player.setPosition(playerX, playerY);                   // WORLD MUST SPECIFY THIS VALUE
         movementController = new MovementController(player, camera);
 
@@ -66,7 +72,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.WHITE);
+        ScreenUtils.clear(Color.BLACK);
 
         camera.update();
 
@@ -76,10 +82,19 @@ public class GameScreen implements Screen {
         // Rendering
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(assetManager.getSprite("emerald"), 0, 0);
-        batch.draw(assetManager.getSprite("emerald"), 16, 0);
-        batch.draw(assetManager.getSprite("rock"), 16, 16);
-        assetManager.getSprite("chest").draw(batch);
+        batch.draw(assetManager.getSprite("floor_1"), 0, 0);
+        batch.draw(assetManager.getSprite("floor_2"), 16, 0);
+        batch.draw(assetManager.getSprite("floor_1"), 16, 16);
+        batch.draw(assetManager.getSprite("floor_2"), 0, 16);
+        batch.draw(assetManager.getSprite("floor_1"), 32, 16);
+        batch.draw(assetManager.getSprite("wall_1"), 0, 32);
+        batch.draw(assetManager.getSprite("wall_2"), 16, 32);
+        batch.draw(assetManager.getSprite("wall_1"), 32, 32);
+        batch.draw(assetManager.getSprite("top_wall_1"), 0, 48);
+        batch.draw(assetManager.getSprite("top_wall_2"), 16, 48);
+        batch.draw(assetManager.getSprite("top_wall_1"), 32, 48);
+//        assetManager.getSprite("top_wall_1").draw(batch);
+        player.draw(batch);
         batch.end();
     }
 
