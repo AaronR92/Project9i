@@ -28,8 +28,12 @@ public class MainMenuScreen implements Screen {
     private Stage stage;
     private Table table;
 
-    private Texture buttonPlayInactive;
-    private Texture buttonPlayActive;
+    private Texture buttonPlay;
+    private Texture buttonPlayHover;
+    private Texture buttonSettings;
+    private Texture buttonSettingsHover;
+    private Texture buttonExit;
+    private Texture buttonExitHover;
 
     public MainMenuScreen(GameMain gameMain) {
         this.game = gameMain;
@@ -38,23 +42,47 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         // adding textures
-        buttonPlayInactive = new Texture(Gdx.files.internal("button/inactive_play.png"));
+        buttonPlay = new Texture(Gdx.files.internal("button/play.png"));
+        buttonPlayHover = new Texture(Gdx.files.internal("button/play_hover.png"));
+
+        buttonSettings = new Texture(Gdx.files.internal("button/settings.png"));
+        buttonSettingsHover = new Texture(Gdx.files.internal("button/settings_hover.png"));
+
+        buttonExit = new Texture(Gdx.files.internal("button/exit.png"));
+        buttonExitHover = new Texture(Gdx.files.internal("button/exit_hover.png"));
 
         // table
         table = new Table();
+        table.setPosition(Gdx.graphics.getWidth() / -3f,  0);
         table.setFillParent(true);
         stage.addActor(table);
 
-        table.setDebug(true);
-
         ButtonStyle playButtonStyle = new ButtonStyle();
-        playButtonStyle.up = new TextureRegionDrawable(new TextureRegion(buttonPlayInactive));
+        playButtonStyle.up = new TextureRegionDrawable(new TextureRegion(buttonPlay));
+        playButtonStyle.over = new TextureRegionDrawable(new TextureRegion(buttonPlayHover));
+
+        ButtonStyle settingsButtonStyle = new ButtonStyle();
+        settingsButtonStyle.up = new TextureRegionDrawable(new TextureRegion(buttonSettings));
+        settingsButtonStyle.over = new TextureRegionDrawable(new TextureRegion(buttonSettingsHover));
+
+        ButtonStyle exitButtonStyle = new ButtonStyle();
+        exitButtonStyle.up = new TextureRegionDrawable(new TextureRegion(buttonExit));
+        exitButtonStyle.over = new TextureRegionDrawable(new TextureRegion(buttonExitHover));
 
         Button buttonPlay = new Button(playButtonStyle);
+        Button buttonSettings = new Button(settingsButtonStyle);
+        Button buttonExit = new Button(exitButtonStyle);
         addClickEventListener(buttonPlay, new GameScreen(game));
+        addClickEventListener(buttonSettings, null);
+        addClickEventListener(buttonExit, null);
 
-        table.add(buttonPlay);
-        table.row();
+        table.add(buttonPlay).size(BUTTON_WIDTH * 4, BUTTON_HEIGHT * 4);
+        table.row().pad(8f);
+        table.add(buttonSettings).size(BUTTON_WIDTH * 4, BUTTON_HEIGHT * 4);
+        table.row().pad(8f);
+        table.add(buttonExit).size(BUTTON_WIDTH * 4, BUTTON_HEIGHT * 4);
+
+        table.setDebug(false);
 
         background = new Sprite(new Texture(Gdx.files.internal("Castle.png")));
 
@@ -106,6 +134,10 @@ public class MainMenuScreen implements Screen {
         button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, final Actor actor) {
+                if (screen == null) {
+                    Gdx.app.exit();
+                    return;
+                }
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
