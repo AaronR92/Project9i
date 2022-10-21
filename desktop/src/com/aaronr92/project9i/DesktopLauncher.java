@@ -14,6 +14,5 @@ public class DesktopLauncher {
 		config.setResizable(false);
 		config.setWindowedMode(1920, 1080);
 		new Lwjgl3Application(new GameMain(), config);
-		Gdx.input.setCursorCatched(true);
 	}
 }

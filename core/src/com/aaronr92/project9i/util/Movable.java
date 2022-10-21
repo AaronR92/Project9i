@@ -2,8 +2,12 @@ package com.aaronr92.project9i.util;
 
 public interface Movable {
 
-    void moveRight();
+    void moveRight(boolean isDiagonal);
 
-    void moveLeft();
+    void moveLeft(boolean isDiagonal);
+
+    void moveUp(boolean isDiagonal);
+
+    void moveDown(boolean isDiagonal);
 
 }

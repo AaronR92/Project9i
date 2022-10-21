@@ -5,6 +5,7 @@ import com.aaronr92.project9i.object.Player;
 import com.aaronr92.project9i.util.AssetManager;
 import com.aaronr92.project9i.util.MovementController;
 import com.aaronr92.project9i.util.SpriteSize;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -22,16 +23,18 @@ public class GameScreen implements Screen {
     //player
     private Player player;
 
-    //temporary values
+    // Values
+    private final int WIDTH = 512;
+    private final int HEIGHT = 288;
 
     public GameScreen(GameMain game) {
 
-        // Setting main
+        // Setting up main
         this.game = game;
 
         // Camera
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 400, 240);
+        camera.setToOrtho(false, WIDTH, HEIGHT);
 
         // AssetManager
         assetManager = new AssetManager("tileset/frozen_level_tileset.png", SpriteSize.SPRITE_16x16);
@@ -45,17 +48,9 @@ public class GameScreen implements Screen {
         assetManager.addSprite("top_wall_2", 3, 1);
         assetManager.addSprite("player", 0, 6);
 
-        // Player init
-        /* TODO
-        *   MOVE CODE BELOW INTO YAML FILE OR ETC
-        *   AND ALSO MOVE ALL CONST VALUES THERE (e.g. screen size)
-        */
-        int playerX = (256 / 2) - 8;
-        int playerY = (144 / 2) - 8;
-
-        player = new Player(assetManager.getSprite("player"), SpriteSize.SPRITE_16x16);
+        player = new Player(assetManager.getSprite("player"), SpriteSize.SPRITE_16x16,
+                WIDTH / 2, HEIGHT / 2);
         player.setMovementController(new MovementController(this.player.getSprite(), camera));
-
     }
 
     @Override
