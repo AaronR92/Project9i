@@ -1,5 +1,6 @@
-package com.aaronr92;
+package com.aaronr92.project9i;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -7,10 +8,11 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setForegroundFPS(60);
 		config.setTitle("Project9i");
-		config.setWindowedMode(1280, 720);
+		config.setForegroundFPS(60);
+//		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		config.setResizable(false);
+		config.setWindowedMode(1920, 1080);
 		new Lwjgl3Application(new GameMain(), config);
 	}
 }

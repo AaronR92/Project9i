@@ -1,4 +1,4 @@
-package com.aaronr92.util;
+package com.aaronr92.project9i.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -33,6 +33,11 @@ public class AssetManager {
 
     public void addSprite(String name, int row, int column) {
         sprites.put(name, new Sprite(texture, spriteSize * column, spriteSize * row, spriteSize, spriteSize));
+    }
+
+    public void dispose() {
+        texture.dispose();
+        sprites.clear();
     }
 
     public Sprite getSprite(String name) {
