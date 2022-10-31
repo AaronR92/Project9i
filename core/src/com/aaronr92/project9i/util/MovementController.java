@@ -82,7 +82,7 @@ public class MovementController implements Movable {
         }
     }
 
-    public void updateSpeedMultiplier(float speedMultiplier) {
+    public void setSpeedMultiplier(float speedMultiplier) {
         this.speedMultiplier = speedMultiplier;
     }
 

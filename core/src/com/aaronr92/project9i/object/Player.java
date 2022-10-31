@@ -39,16 +39,12 @@ public class Player {
         // Normal
         else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             movementController.moveLeft(false);
-            System.out.println("A");
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             movementController.moveRight(false);
-            System.out.println("D");
         } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             movementController.moveUp(false);
-            System.out.println("W");
         } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             movementController.moveDown(false);
-            System.out.println("S");
         }
     }
 
