@@ -13,8 +13,6 @@ public class MovementController implements Movable {
     private float diagonalMultiplier;
     private boolean lookingLeft;
     private boolean lookingRight;
-    private boolean lookingUp;
-    private boolean lookingDown;
 
     public MovementController(Sprite player, OrthographicCamera camera) {
         this.camera = camera;
@@ -24,16 +22,14 @@ public class MovementController implements Movable {
         diagonalMultiplier = 0.7f;
         lookingLeft = false;
         lookingRight = true;
-        lookingDown = true;
-        lookingUp = false;
     }
 
     @Override
     public void moveRight(boolean isDiagonal) {
         // Flipping player
         if (!lookingRight) {
-            lookingRight = true;
             lookingLeft = false;
+            lookingRight = true;
             player.flip(true, false);
         }
 
@@ -50,8 +46,8 @@ public class MovementController implements Movable {
     public void moveLeft(boolean isDiagonal) {
         // Flipping player
         if (!lookingLeft) {
-            lookingLeft = true;
             lookingRight = false;
+            lookingLeft = true;
             player.flip(true, false);
         }
 
